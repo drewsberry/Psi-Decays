@@ -1,1 +1,0 @@
-These simulations are for the decay D0 -> K+ K- K- Pi+.
