@@ -2,7 +2,6 @@
 #include "RooGlobalFunc.h"
 #endif
 
-// ROOT Things... you may need to add more
 #include "TFile.h"
 #include "TH1.h"
 #include "TF1.h"
