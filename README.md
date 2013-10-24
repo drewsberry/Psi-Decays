@@ -7,13 +7,13 @@ The purpose of this code is two-part:
 1. Investigate the invariant mass distributions of the product particles of three decays:
 
   * ![equation](.eqns/psi.png)
-  * ![equation](http://www.sciweavers.org/tex2img.php?eq=B%5E%2B%20%5Crightarrow%20D%5E0%20%5Coverline%7BD%7D%5E0%20K%5E%2B&bc=White&fc=Black&im=png&fs=12&ff=arev&edit=0)
-  * ![equation](http://www.sciweavers.org/upload/Tex2Img_1382640846/eqn.png)
+  * ![equation](.eqns/BPlus.png)
+  * ![equation](.eqns/D0.png)
 
 2. Investigate the decay angles between product pairs in the following two decays:
 
-  * ![equation](http://www.sciweavers.org/tex2img.php?eq=%5Cpsi%283770%29%20%5Crightarrow%20D%5E0%20%5Coverline%7BD%7D%5E0&bc=White&fc=Black&im=png&fs=12&ff=arev&edit=0)
-  * ![equation](hhttp://www.sciweavers.org/tex2img.php?eq=B%20%5Crightarrow%20%28%5Cpsi%283770%29%20%5Crightarrow%20D%5E0%20%5Coverline%7BD%7D%5E0%29%20K&bc=White&fc=Black&im=png&fs=12&ff=arev&edit=0)
+  * ![equation](.eqns/psi.png)
+  * ![equation](.eqns/B.png)
 
 These results demonstrate that the decay angle of the decays is sufficiently
 sharply peaked to be used as a discriminator from the background.
