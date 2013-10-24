@@ -6,9 +6,9 @@ The purpose of this code is two-part:
 
 1. Investigate the invariant mass distributions of the product particles of three decays:
 
-  * ![equation](http://latex.codecogs.com/png.latex?%5Cpsi%283770%29%20%5Crightarrow%20D%5E0%20%5Coverline%7BD%7D%5E0)
+  * ![equation](http://www.sciweavers.org/upload/Tex2Img_1382640789/eqn.png)
   * ![equation](http://www.sciweavers.org/tex2img.php?eq=B%5E%2B%20%5Crightarrow%20D%5E0%20%5Coverline%7BD%7D%5E0%20K%5E%2B&bc=White&fc=Black&im=png&fs=12&ff=arev&edit=0)
-  * ![equation](http://www.sciweavers.org/tex2img.php?eq=D%5E0%20%5Crightarrow%20K%5E%2B%20K%5E-%20K%5E-%20%5Cpi%5E%2B&bc=White&fc=Black&im=png&fs=12&ff=arev&edit=0)
+  * ![equation](http://www.sciweavers.org/upload/Tex2Img_1382640846/eqn.png)
 
 2. Investigate the decay angles between product pairs in the following two decays:
 
