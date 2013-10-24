@@ -6,7 +6,7 @@ The purpose of this code is two-part:
 
 1. Investigate the invariant mass distributions of the product particles of three decays:
 
-  * ![equation](http://www.sciweavers.org/tex2img.php?eq=%5Cpsi%283770%29%20%5Crightarrow%20D%5E0%20%5Coverline%7BD%7D%5E0&bc=White&fc=Black&im=png&fs=12&ff=arev&edit=0)
+  * ![equation](http://latex.codecogs.com/png.latex?\psi(3770)&space;\rightarrow&space;D^0&space;\overline{D}^0)
   * ![equation](http://www.sciweavers.org/tex2img.php?eq=B%5E%2B%20%5Crightarrow%20D%5E0%20%5Coverline%7BD%7D%5E0%20K%5E%2B&bc=White&fc=Black&im=png&fs=12&ff=arev&edit=0)
   * ![equation](http://www.sciweavers.org/tex2img.php?eq=D%5E0%20%5Crightarrow%20K%5E%2B%20K%5E-%20K%5E-%20%5Cpi%5E%2B&bc=White&fc=Black&im=png&fs=12&ff=arev&edit=0)
 
