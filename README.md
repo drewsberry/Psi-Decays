@@ -18,6 +18,6 @@ The purpose of this code is two-part:
 These results demonstrate that the decay angle of the decays is sufficiently
 sharply peaked to be used as a discriminator from the background.
 
-It can therefore be used to distinguish the ![equation](http://bit.ly/1aagay2)
+It can therefore be used to distinguish the ![equation](.eqns/psi.png)
 decays for use in symmetry violation studies such as those measuring the strong
 phase information of the decay.
