@@ -3,34 +3,6 @@ using namespace std;
 
 void Program::Fit()
 {
-    gaussFuncPx = new TF1("gaussFuncPx", 
-            "[0]*TMath::Gaus(x,[1],[2])",-37000,53000);
-    gaussFuncPx->SetParameters(40000, 58, 3500);
-    gaussFuncPx->SetNpx(1000);
-
-
-    gaussFuncPy = new TF1("gaussFuncPy", 
-            "[0]*TMath::Gaus(x,[1],[2])",-30000,30000);
-    gaussFuncPy->SetParameters(40000, 58, 3500);
-    gaussFuncPy->SetNpx(1000);
-
-    landauFunc = new TF1("landauFunc", 
-            "[2]*TMath::Landau(x*[3]+[4],[0],[1],0)",0,60000);
-    landauFunc->SetParameters(200,200,40000,1,2000);
-    landauFunc->SetNpx(1000); // Makes for smoother graph
-    // Function for custom Landau fitting
-
-    gaussFuncPz = new TF1("gaussFuncPz", 
-            "[2]*TMath::Gaus(x,[0],[1])", 62000, 1000000);
-    gaussFuncPz->SetParameters(58, 3500, 40000);
-    gaussFuncPz->SetNpx(1000); // Makes for smoother graph
-
-    totalPz = new TF1("totalPz",
-            "[2]*TMath::Landau(x*[3]+[4],[0],[1],0) + [5]*TMath::Gaus(x,[6],[7])", 
-            0, 1000000);
-    totalPz->SetNpx(1000);
-    // Define total function combining Landau and Gaussian
-
     TCanvas     *fitCanvas      = new TCanvas("fitCanvas", "Fitting Canvas", 1500, 500);
     fitCanvas->Divide(3,1);
 
@@ -83,13 +55,13 @@ void Program::Fit()
 
     fitCanvas -> Print("fitCanvas.eps");
 
-    pxRand      = new TH1F("pxRand", "pxRand", pxHist->GetNbinsX(), pxHist->GetXaxis()->GetXmin(), pxHist->GetXaxis()->GetXmax());
-    pyRand      = new TH1F("pyRand", "pyRand", pyHist->GetNbinsX(), pyHist->GetXaxis()->GetXmin(), pyHist->GetXaxis()->GetXmax());
-    pzRand      = new TH1F("pzRand", "pzRand", pzHist->GetNbinsX(), pzHist->GetXaxis()->GetXmin(), pzHist->GetXaxis()->GetXmax());
+    pxRand      = new TH1F("pxRand", "pxRand", pxNBins, pxXMin, pxXMax);
+    pyRand      = new TH1F("pyRand", "pyRand", pyNBins, pyXMin, pyXMax);
+    pzRand      = new TH1F("pzRand", "pzRand", pzNBins, pzXMin, pzXMax);
 
-    pxHistScale = TH1F("pxHistScale", "pxHistScale", pxHist->GetNbinsX(), pxHist->GetXaxis()->GetXmin(), pxHist->GetXaxis()->GetXmax());
-    pyHistScale = TH1F("pyHistScale", "pyHistScale", pyHist->GetNbinsX(), pyHist->GetXaxis()->GetXmin(), pyHist->GetXaxis()->GetXmax());
-    pzHistScale = TH1F("pzHistScale", "pzHistScale", pzHist->GetNbinsX(), pzHist->GetXaxis()->GetXmin(), pzHist->GetXaxis()->GetXmax());   
+    pxHistScale = new TH1F("pxHistScale", "pxHistScale", pxNBins, pxXMin, pxXMax);
+    pyHistScale = new TH1F("pyHistScale", "pyHistScale", pyNBins, pyXMin, pyXMax);
+    pzHistScale = new TH1F("pzHistScale", "pzHistScale", pzNBins, pzXMin, pzXMax);   
     
     for (Int_t i; i < 1000000; i++)
     {
@@ -103,20 +75,20 @@ void Program::Fit()
 
     randCanvas->cd(1);
     pxHistScale = *pxHist;
-    pxHistScale.Draw();
+    pxHistScale->Draw();
     pxRand->Scale((pxHist->GetEntries())/(pxRand->GetEntries()));
     pxRand->Draw("same");
 
 
     randCanvas->cd(2);
     pyHistScale = *pyHist;
-    pyHistScale.Draw();
+    pyHistScale->Draw();
     pyRand->Scale((pyHist->GetEntries())/(pyRand->GetEntries()));
     pyRand->Draw("same");
 
     randCanvas->cd(3);
     pzHistScale = *pzHist;
-    pzHistScale.Draw();
+    pzHistScale->Draw();
     pzRand->Scale((pzHist->GetEntries())/(pzRand->GetEntries()));
     pzRand->Draw("same");
 
