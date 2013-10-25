@@ -6,6 +6,8 @@ Int_t Program::Code()
     /* Note that TFGenPhaseSpace, as per LHCb standard, is in GeV. Hence all the
      * calculations and graphs hereonin are in GeV. */
      
+    gStyle->SetOptStat(0); // Get rid of annoying statistics
+
     const Int_t NRGBs = 5;
     const Int_t NCont = 35;
     Double_t stops[NRGBs] = { 0.00, 0.34, 0.61, 0.84, 1.00 };
@@ -15,24 +17,30 @@ Int_t Program::Code()
     TColor::CreateGradientColorTable(NRGBs, stops, red, green, blue, NCont);
     gStyle -> SetNumberContours(NCont);
     
-    if (!gROOT->GetClass("TGenPhaseSpace")) // Get "TGenPhaseSpace" c;ass
+    if (!gROOT->GetClass("TGenPhaseSpace")) // Get "TGenPhaseSpace" class
         gSystem->Load("libPhysics"); // Load it if successful
 
-    TH2F *hist = new TH2F("hist", "B Plus Decay", 50, 5, 12, 50, 5, 12);
-    TH2F *hist2 = new TH2F("hist2", "B Plus Decay 2", 50, 12, 25, 50, 5, 12);
-    TH1F *hist3 = new TH1F("hist3", "B Plus Decay 3", 50, 3.5, 5);
+    TH2F *DK-DKHist = new TH2F(
+        "DK-DKHist; m^{2}(D^{0}K^{+}) [(GeV/c^{2})^{2}];m^{2}(#bar{D^{0}}K^{+}) [(GeV/c^{2})^{2}]",
+        "DK-DK", 50, 5, 12, 50, 5, 12);
+    TH2F *DK-DDHist = new TH2F(
+        "DK-DDHist;m^{2}(D^{0}#bar{D^{0}}) [(GeV/c^{2})^{2}];m^{2}(D^{0}K^{+}) [(GeV/c^{2})^{2}]",
+        "DK-DD", 50, 12, 25, 50, 5, 12);
+    TH1F *D-DHist = new TH1F(
+        "B^{+} Meson Decay;m(D^{0}#bar{D^{0}}) [GeV/c^{2}]", 
+        "D-D", 50, 3.5, 5);
     // Declare the histograms to be ploted later
 
-    TLorentzVector B_plus(0.0, 0.0, 0.0,5.27953);
+    TLorentzVector B_plus(0.0, 0.0, 0.0, BPLUSMASS);
     // Lorentz Vector for the parent B+ (in rest frame)
 
-    Double_t masses[3] = { 1.86484, 1.86484, 0.493677 };
+    Double_t masses[3] = { DMASS, DMASS, KPLUSMASS };
     // Array of masses for the product particles
 
     TGenPhaseSpace event; // Declare event of type class TGenPhaseSpace
     event.SetDecay(B_plus, 3, masses); // Set the decay up
 
-    for (Int_t n = 0; n < 100000; n++) // Loop 100,000 times
+    for (Int_t n = 0; n < 1000000; n++)
     {
         Double_t        weight          = event.Generate();
         // Generate weightings for each decay
@@ -52,51 +60,46 @@ Int_t Program::Code()
          * Note the TLorentzVectors are pointers, so need to be dereferenced.
          * For use in calculating the invariant mass of the combinations*/
 
-        hist->Fill(D_0K_plus.M2(), D_0barK_plus.M2(), weight);
-        hist2->Fill(D_0D_0bar.M2(), D_0K_plus.M2(), weight);
+        DK-DKHist->Fill(D_0K_plus.M2(), D_0barK_plus.M2(), weight);
+        DK-DDHist->Fill(D_0D_0bar.M2(), D_0K_plus.M2(), weight);
         // Fill the histograms with weighted invariant mass squared
 
-        hist3->Fill(D_0D_0bar.M(), weight);
+        D-DHist->Fill(D_0D_0bar.M(), weight);
         // Fill the histograms with weighted invariant mass
     }
 
-    // Split the canvas into 4 pads
-    TCanvas *canv1 = new TCanvas("canv1", "Canvas", 1000, 500);
-    canv1->Divide(2,1);
+    TCanvas *2DCanv = new TCanvas("2DCanv", "2DCanvas", 1000, 500);
+    2DCanv->Divide(2,1);
 
-    gStyle->SetOptStat(0); // Get rid of annoying statistics
-
-    canv1->cd(1);
-    hist->SetTitle(";m^{2}(D^{0}K^{+}) [(GeV/c^{2})^{2}];m^{2}(#bar{D^{0}}K^{+}) [(GeV/c^{2})^{2}]");
+    2DCanv->cd(1);
     hist->GetXaxis()->CenterTitle();
     hist->GetXaxis()->SetTitleOffset(1.75);
     hist->GetYaxis()->CenterTitle();
     hist->GetYaxis()->SetTitleOffset(1.75);
     hist->Draw("Lego2"); // Lego 2D histogram
 
-    canv1->cd(2);
-    hist2->SetTitle(";m^{2}(D^{0}#bar{D^{0}}) [(GeV/c^{2})^{2}];m^{2}(D^{0}K^{+}) [(GeV/c^{2})^{2}]");
+    2DCanv->cd(2);
     hist2->GetXaxis()->CenterTitle();
     hist2->GetXaxis()->SetTitleOffset(1.75);
     hist2->GetYaxis()->CenterTitle();
     hist2->GetYaxis()->SetTitleOffset(1.75);
     hist2->Draw("Lego2");
 
-    TCanvas *canv2 = new TCanvas("canv2", "Canvas", 500, 500);
+    TCanvas *1DCanv = new TCanvas("2DCanv", "1DCanvas", 500, 500);
 
-    hist3->SetTitle("B^{+} Meson Decay;m(D^{0}#bar{D^{0}}) [GeV/c^{2}]");
-    hist3->GetXaxis()->CenterTitle();
-    hist3->GetXaxis()->SetTitleOffset(1.25);
-    hist3->Draw();
+    1DCanv->SetTitle("B^{+} Meson Decay;m(D^{0}#bar{D^{0}}) [GeV/c^{2}]");
+    1DCanv->GetXaxis()->CenterTitle();
+    1DCanv->GetXaxis()->SetTitleOffset(1.25);
+    1DCanv->Draw();
 
-    canv1->Print("../graphs/ThreeBodyDecay1.eps");
-    canv2->Print("../graphs/ThreeBodyDecay2.eps");
+    2DCanv->Print("../graphs/ThreeBodyDecay1.eps");
+    1DCanv->Print("../graphs/ThreeBodyDecay2.eps");
 
-    delete canv1;
-    delete canv2;
-    delete hist;
-    delete hist2;
-    delete hist3;
+    delete 1DCanv;
+    delete 2DCanv;
+    delete DK-DKHist;
+    delete DK-DDHist;
+    delete D-DHist;
 
     return 0;
 }
