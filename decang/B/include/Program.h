@@ -28,6 +28,9 @@
 #include <sstream>
 #include <iostream>
 
+#define PSIMASS 3.773
+#define DMASS 1.86962
+
 // define a class "Example"
 class Program {
 
