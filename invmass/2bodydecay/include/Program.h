@@ -29,6 +29,9 @@
 #include <iostream>
 #include <fstream>
 
+#define PSIMASS 3.773
+#define DMASS 1.86484
+
 class Program {
 
 // define items that are only to be used by the class and only accessible by the class
