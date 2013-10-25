@@ -65,9 +65,9 @@ void Program::Fit()
     
     for (Int_t i; i < 1000000; i++)
     {
-        pxRand->Fill(gaussFuncPx -> GetRandom());
-        pyRand->Fill(gaussFuncPy -> GetRandom());
-        pzRand->Fill(totalPz -> GetRandom());
+        pxRand->Fill(gaussFuncPx->GetRandom());
+        pyRand->Fill(gaussFuncPy->GetRandom());
+        pzRand->Fill(totalPz->GetRandom());
     }
 
     TCanvas     *randCanvas     = new TCanvas("randCanvas", "Random Canvas", 1500, 500);
