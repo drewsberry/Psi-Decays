@@ -33,7 +33,18 @@ class Program {
 
 // define items that are only to be used by the class and only accessible by the class
 private:
-      // PROGRAM::FIT()
+  // PROGRAM::FIT()
+  Int_t pxNBins;
+  Double_t pxXMin;
+  Double_t pxXMax;
+  
+  Int_t pyNBins;
+  Double_t pyXMin;
+  Double_t pyXMax;
+  
+  Int_t pzNBins;
+  Double_t pzXMin;
+  Double_t pzXMax;
 
   // Custom functions
   TF1       *gaussFuncPx;
@@ -80,6 +91,7 @@ public:
   }
 
   // Function declarations and/or definitions
+  void Setup();
   void Fit();
   void Boost();
 };
