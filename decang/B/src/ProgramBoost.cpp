@@ -3,22 +3,14 @@ using namespace std;
 
 void Program::Boost()
 {
-    if (!gROOT -> GetClass("TGenPhaseSpace"))
-        gSystem -> Load("libPhysics");
+    TLorentzVector Psi_3770(0.0, 0.0, 0.0, PSIMASS);
 
-    TLorentzVector Psi_3770(0.0, 0.0, 0.0, 3.770);
-
-    Double_t masses[2] = { 1.86484, 1.86484 };
+    Double_t masses[2] = { DMASS, DMASS };
 
     TGenPhaseSpace event;
     event.SetDecay(Psi_3770, 2, masses);
 
-    histNonBoost = new TH1F("Non-Boosted D^{0} #bar{D^{0}} Angle",
-            "Non-Boosted Angle Between D ^{0} and #bar{D}^{0}", 50, 179, 181);
-    histBoost = new TH1F("Boosted D^{0} #bar{D^{0}} Angle",
-            "Boosted Angle Between D ^{0} and #bar{D}^{0}", 200, 0, 5);
-
-    for (Int_t n = 0; n < 10000000; n++)
+    for (Int_t n = 0; n < 1000000; n++)
     {
         Double_t        weight         = event.Generate(); // Weighting for each event
 
@@ -54,32 +46,32 @@ void Program::Boost()
         D0bar -> Boost(boostVector);
         // Boost particles by previously calculated vector
         
-        Double_t        boostedAngle    = D0bar -> Angle(D0 -> Vect());
+        Double_t        boostedAngle    = D0bar->Angle(D0->Vect());
         // Calculate angle between boosted vectors
-        histBoost -> Fill(boostedAngle*(180.0/TMath::Pi()), weight);
+        histBoost->Fill(boostedAngle*(180.0/TMath::Pi()), weight);
         // Fill hist in degrees (default = radians)
     }
 
-    gStyle -> SetOptStat(0);
+    gStyle->SetOptStat(0);
 
-    TCanvas     *anglesCanvas        =new TCanvas("anglesCanvas", "anglesCanvas", 1000, 500);
-    anglesCanvas -> Divide(2,1);
+    TCanvas     *anglesCanvas        = new TCanvas("anglesCanvas", "anglesCanvas", 1000, 500);
+    anglesCanvas->Divide(2,1);
 
-    anglesCanvas -> cd(1);
-    histNonBoost -> SetTitle("Non-Boosted Angle Between D ^{0} and #bar{D}^{0}; Angle [ #circ];");
-    histNonBoost -> Draw();
+    anglesCanvas->cd(1);
+    histNonBoost->SetTitle("Non-Boosted Angle Between D ^{0} and #bar{D}^{0}; Angle [ #circ];");
+    histNonBoost->Draw();
 
-    anglesCanvas -> cd(2);
-    histBoost -> SetLineColor(2);
-    histBoost -> SetTitle("Boosted Angle Between D ^{0} and #bar{D}^{0}; Angle [ #circ];");
-    histBoost -> Draw();
+    anglesCanvas->cd(2);
+    histBoost->SetLineColor(2);
+    histBoost->SetTitle("Boosted Angle Between D ^{0} and #bar{D}^{0}; Angle [ #circ];");
+    histBoost->Draw();
 
-    anglesCanvas -> Print("anglesCanvas.eps");
+    anglesCanvas->Print("anglesCanvas.eps");
 
-    TCanvas     *boostedAngle        =new TCanvas("boostedAngle", "boostedAngle", 1000, 500);
+    TCanvas     *boostedAngle        = new TCanvas("boostedAngle", "boostedAngle", 1000, 500);
 
-    histBoost -> SetLineColor(4);
-    histBoost -> Draw();
+    histBoost->SetLineColor(4);
+    histBoost->Draw();
 
-    boostedAngle -> Print("boostedAngle.eps");
+    boostedAngle->Print("boostedAngle.eps");
 }
