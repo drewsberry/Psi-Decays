@@ -2,7 +2,6 @@
 #include "RooGlobalFunc.h"
 #endif
 
-// ROOT Things... you may need to add more
 #include "TFile.h"
 #include "TH1.h"
 #include "TF1.h"
@@ -24,11 +23,14 @@
 #include "TLorentzVector.h"
 #include "TGenPhaseSpace.h"
 
-// standard stuff
 #include <exception>
 #include <sstream>
 #include <iostream>
 #include <fstream>
+
+#define BPLUSMASS 5.27925
+#define DMASS 1.86962
+#define KPLUSMASS 0.493677
 
 class Program {
 
@@ -61,7 +63,6 @@ public:
 
   // Function declarations and/or definitions
   Int_t Code(); // Define function for processing actual code
-  Int_t Clean();
 };
 
 // vim: set tabstop=2:
