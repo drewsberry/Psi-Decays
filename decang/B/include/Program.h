@@ -64,9 +64,9 @@ private:
   TH1F      *pxRand;
   TH1F      *pyRand;
   TH1F      *pzRand;
-  TH1F      pxHistScale;
-  TH1F      pyHistScale;
-  TH1F      pzHistScale;
+  TH1F      *pxHistScale;
+  TH1F      *pyHistScale;
+  TH1F      *pzHistScale;
 
   // Parameter arrays
   Double_t  ipar[8]; // Initial parameters
