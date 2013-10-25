@@ -28,7 +28,7 @@
 #include <fstream>
 
 #define PSIMASS 3.773
-#define DMASS 1.86484
+#define DMASS 1.870
 
 class Program {
 
