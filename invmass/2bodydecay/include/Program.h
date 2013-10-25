@@ -2,7 +2,6 @@
 #include "RooGlobalFunc.h"
 #endif
 
-// ROOT Things... you may need to add more
 #include "TFile.h"
 #include "TH1.h"
 #include "TF1.h"
@@ -23,7 +22,6 @@
 #include "TGenPhaseSpace.h"
 #include "TLorentzVector.h"
 
-// standard stuff
 #include <exception>
 #include <sstream>
 #include <iostream>
@@ -63,7 +61,6 @@ public:
 
   // Function declarations and/or definitions
   Int_t Code(); // Define function for processing actual code
-  Int_t Clean();
 };
 
 // vim: set tabstop=2:
