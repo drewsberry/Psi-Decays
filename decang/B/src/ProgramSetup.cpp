@@ -3,6 +3,9 @@ using namespace std;
 
 Int_t Program::Setup()
 {
+    if (!gROOT->GetClass("TGenPhaseSpace"))
+        gSystem->Load("libPhysics");
+
     pxNBins = pxHist->GetNBinsX();
     pxXMin  = pxHist->GetXaxis()->GetXmin();
     pxXMax  = pxHist->GetXaxis()->GetXmax();
@@ -42,5 +45,9 @@ Int_t Program::Setup()
             0, 1000000);
     totalPz->SetNpx(1000);
     // Define total function combining Landau and Gaussian
-
+    
+    histNonBoost = new TH1F("Non-Boosted D^{0} #bar{D^{0}} Angle",
+            "Non-Boosted Angle Between D ^{0} and #bar{D}^{0}", 50, 179, 181);
+    histBoost = new TH1F("Boosted D^{0} #bar{D^{0}} Angle",
+            "Boosted Angle Between D ^{0} and #bar{D}^{0}", 200, 0, 5);
 }
