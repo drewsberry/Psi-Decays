@@ -37,6 +37,11 @@ class Program {
 // define items that are only to be used by the class and only accessible by the class
 private:
   // Declare any variables/functions used privately by Program here
+
+  TH2F *DK_DKHist;
+  TH2F *DK_DDHist;
+  TH1F *D_DHist;
+
   TH1F *getHist()
   {
       TH1F      *currentHist;

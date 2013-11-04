@@ -20,15 +20,15 @@ Int_t Program::Code()
     if (!gROOT->GetClass("TGenPhaseSpace")) // Get "TGenPhaseSpace" class
         gSystem->Load("libPhysics"); // Load it if successful
 
-    TH2F *DK-DKHist = new TH2F(
+    DK_DKHist = new TH2F("DK-DK",
         "DK-DKHist; m^{2}(D^{0}K^{+}) [(GeV/c^{2})^{2}];m^{2}(#bar{D^{0}}K^{+}) [(GeV/c^{2})^{2}]",
-        "DK-DK", 50, 5, 12, 50, 5, 12);
-    TH2F *DK-DDHist = new TH2F(
+         50, 5, 12, 50, 5, 12);
+    DK_DDHist = new TH2F("DK-DD",
         "DK-DDHist;m^{2}(D^{0}#bar{D^{0}}) [(GeV/c^{2})^{2}];m^{2}(D^{0}K^{+}) [(GeV/c^{2})^{2}]",
-        "DK-DD", 50, 12, 25, 50, 5, 12);
-    TH1F *D-DHist = new TH1F(
+         50, 12, 25, 50, 5, 12);
+    D_DHist = new TH1F("D-D",
         "B^{+} Meson Decay;m(D^{0}#bar{D^{0}}) [GeV/c^{2}]", 
-        "D-D", 50, 3.5, 5);
+         50, 3.5, 5);
     // Declare the histograms to be ploted later
 
     TLorentzVector B_plus(0.0, 0.0, 0.0, BPLUSMASS);
@@ -60,46 +60,46 @@ Int_t Program::Code()
          * Note the TLorentzVectors are pointers, so need to be dereferenced.
          * For use in calculating the invariant mass of the combinations*/
 
-        DK-DKHist->Fill(D_0K_plus.M2(), D_0barK_plus.M2(), weight);
-        DK-DDHist->Fill(D_0D_0bar.M2(), D_0K_plus.M2(), weight);
+        DK_DKHist->Fill(D_0K_plus.M2(), D_0barK_plus.M2(), weight);
+        DK_DDHist->Fill(D_0D_0bar.M2(), D_0K_plus.M2(), weight);
         // Fill the histograms with weighted invariant mass squared
 
-        D-DHist->Fill(D_0D_0bar.M(), weight);
+        D_DHist->Fill(D_0D_0bar.M(), weight);
         // Fill the histograms with weighted invariant mass
     }
 
-    TCanvas *2DCanv = new TCanvas("2DCanv", "2DCanvas", 1000, 500);
-    2DCanv->Divide(2,1);
+    TCanvas *TwoDCanv = new TCanvas("TwoDCanv", "TwoDCanvas", 1000, 500);
+    TwoDCanv->Divide(2,1);
 
-    2DCanv->cd(1);
-    hist->GetXaxis()->CenterTitle();
-    hist->GetXaxis()->SetTitleOffset(1.75);
-    hist->GetYaxis()->CenterTitle();
-    hist->GetYaxis()->SetTitleOffset(1.75);
-    hist->Draw("Lego2"); // Lego 2D histogram
+    TwoDCanv->cd(1);
+    DK_DKHist->GetXaxis()->CenterTitle();
+    DK_DKHist->GetXaxis()->SetTitleOffset(1.75);
+    DK_DKHist->GetYaxis()->CenterTitle();
+    DK_DKHist->GetYaxis()->SetTitleOffset(1.75);
+    DK_DKHist->Draw("Lego2"); 
 
-    2DCanv->cd(2);
-    hist2->GetXaxis()->CenterTitle();
-    hist2->GetXaxis()->SetTitleOffset(1.75);
-    hist2->GetYaxis()->CenterTitle();
-    hist2->GetYaxis()->SetTitleOffset(1.75);
-    hist2->Draw("Lego2");
+    TwoDCanv->cd(2);
+    DK_DDHist->GetXaxis()->CenterTitle();
+    DK_DDHist->GetXaxis()->SetTitleOffset(1.75);
+    DK_DDHist->GetYaxis()->CenterTitle();
+    DK_DDHist->GetYaxis()->SetTitleOffset(1.75);
+    DK_DDHist->Draw("Lego2");
 
-    TCanvas *1DCanv = new TCanvas("2DCanv", "1DCanvas", 500, 500);
+    TCanvas *OneDCanv = new TCanvas("TwoDCanv", "OneDCanvas", 500, 500);
 
-    1DCanv->SetTitle("B^{+} Meson Decay;m(D^{0}#bar{D^{0}}) [GeV/c^{2}]");
-    1DCanv->GetXaxis()->CenterTitle();
-    1DCanv->GetXaxis()->SetTitleOffset(1.25);
-    1DCanv->Draw();
+    D_DHist->SetTitle("B^{+} Meson Decay;m(D^{0}#bar{D^{0}}) [GeV/c^{2}]");
+    D_DHist->GetXaxis()->CenterTitle();
+    D_DHist->GetXaxis()->SetTitleOffset(1.25);
+    D_DHist->Draw();
 
-    2DCanv->Print("../graphs/ThreeBodyDecay1.eps");
-    1DCanv->Print("../graphs/ThreeBodyDecay2.eps");
+    TwoDCanv->Print("../graphs/ThreeBodyDecay1.eps");
+    OneDCanv->Print("../graphs/ThreeBodyDecay2.eps");
 
-    delete 1DCanv;
-    delete 2DCanv;
-    delete DK-DKHist;
-    delete DK-DDHist;
-    delete D-DHist;
+    delete OneDCanv;
+    delete TwoDCanv;
+    delete DK_DKHist;
+    delete DK_DDHist;
+    delete D_DHist;
 
     return 0;
 }

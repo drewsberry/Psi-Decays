@@ -72,7 +72,6 @@ int main(int argc, char *argv[])
 ///////////// Runs the actual code
     cout << "Executing code..." << endl;
     Prog->Code();
-    Prog->Clean();
   
 ///////////// If switch used, run app
 ///////////// Any pointer you create with "new" you must delete
