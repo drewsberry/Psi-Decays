@@ -21,10 +21,10 @@ Int_t Program::Code()
         gSystem->Load("libPhysics"); // Load it if successful
 
     DK_DKHist = new TH2F("DK-DK",
-        "DK-DKHist; m^{2}(D^{0}K^{+}) [(GeV/c^{2})^{2}];m^{2}(#bar{D^{0}}K^{+}) [(GeV/c^{2})^{2}]",
+        "DK-DK; m^{2}(D^{0}K^{+}) [(GeV/c^{2})^{2}];m^{2}(#bar{D^{0}}K^{+}) [(GeV/c^{2})^{2}]",
          50, 5, 12, 50, 5, 12);
     DK_DDHist = new TH2F("DK-DD",
-        "DK-DDHist;m^{2}(D^{0}#bar{D^{0}}) [(GeV/c^{2})^{2}];m^{2}(D^{0}K^{+}) [(GeV/c^{2})^{2}]",
+        "DK-DD;m^{2}(D^{0}#bar{D^{0}}) [(GeV/c^{2})^{2}];m^{2}(D^{0}K^{+}) [(GeV/c^{2})^{2}]",
          50, 12, 25, 50, 5, 12);
     D_DHist = new TH1F("D-D",
         "B^{+} Meson Decay;m(D^{0}#bar{D^{0}}) [GeV/c^{2}]", 
@@ -85,15 +85,15 @@ Int_t Program::Code()
     DK_DDHist->GetYaxis()->SetTitleOffset(1.75);
     DK_DDHist->Draw("Lego2");
 
-    TCanvas *OneDCanv = new TCanvas("TwoDCanv", "OneDCanvas", 500, 500);
+    TwoDCanv->Print("../graphs/ThreeBodyDecay2D.eps");
+    
+    TCanvas *OneDCanv = new TCanvas("OneDCanv", "OneDCanvas", 500, 500);
 
-    D_DHist->SetTitle("B^{+} Meson Decay;m(D^{0}#bar{D^{0}}) [GeV/c^{2}]");
     D_DHist->GetXaxis()->CenterTitle();
     D_DHist->GetXaxis()->SetTitleOffset(1.25);
     D_DHist->Draw();
 
-    TwoDCanv->Print("../graphs/ThreeBodyDecay1.eps");
-    OneDCanv->Print("../graphs/ThreeBodyDecay2.eps");
+    OneDCanv->Print("../graphs/ThreeBodyDecay1D.eps");
 
     delete OneDCanv;
     delete TwoDCanv;
