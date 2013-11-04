@@ -35,6 +35,9 @@ class Program {
 // define items that are only to be used by the class and only accessible by the class
 private:
   // Declare any variables/functions used privately by Program here
+
+  TH1F *psiInvMass;
+
   TH1F *getHist()
   {
       TH1F      *currentHist;
@@ -61,6 +64,7 @@ public:
 
   // Function declarations and/or definitions
   Int_t Code(); // Define function for processing actual code
+  Int_t Clean();
 };
 
 // vim: set tabstop=2:

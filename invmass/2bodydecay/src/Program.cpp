@@ -9,8 +9,9 @@ Int_t Program::Code()
     if (!gROOT->GetClass("TGenPhaseSpace"))
         gSystem->Load("libPhysics"); // get and load TGenPhaseSpace class
  
-    TH1F *psiInvMass = new TH1F("#psi(3770) Meson Decay;m(D^{0}#bar{D^{0}}) [GeV/c^{2}];",
-            "#psi(3770) Decay", 50, 3, 4);
+    psiInvMass = new TH1F("#psi(3770) Decay",
+            "#psi(3770) Meson Decay;m(D^{0}#bar{D^{0}}) [GeV/c^{2}];",
+            50, 3, 4);
     // Initialise histogram for plot later
  
     TLorentzVector Psi_3770(0.0, 0.0, 0.0, PSIMASS);
@@ -34,7 +35,7 @@ Int_t Program::Code()
         TLorentzVector  D_0D_0bar      = *D_0 + *D_0bar;
         // Add 4-vectors together, for purpose of calculating invariant mass
  
-        psiInvMass -> Fill(D_0D_0bar.M(), weight);
+        psiInvMass->Fill(D_0D_0bar.M(), weight);
         // Fill histogram with invariant mass
     }
  
@@ -47,7 +48,7 @@ Int_t Program::Code()
     PsiInvMassCanv->Print("../graphs/TwoBodyDecay.eps");
 
     delete PsiInvMassCanv;
-    delete hist;
+    delete psiInvMass;
 
     return 0;
 }
