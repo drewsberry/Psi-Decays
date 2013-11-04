@@ -17,3 +17,6 @@
 
 # Main executable files
 Main
+
+# Swap files
+.*.swp
