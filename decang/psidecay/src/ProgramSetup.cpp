@@ -5,19 +5,12 @@ Int_t Program::Setup()
 {
     if (!gROOT->GetClass("TGenPhaseSpace"))
         gSystem->Load("libPhysics");
+    
+    gStyle->SetOptStat(0);
+    
+    file   = TFile::Open("../data/momentum.root");
+    tree   = (TTree *)file->Get("mc_k3pi");
 
-    pxNBins = pxHist->GetNBinsX();
-    pxXMin  = pxHist->GetXaxis()->GetXmin();
-    pxXMax  = pxHist->GetXaxis()->GetXmax();
-    
-    pyNBins = pyHist->GetNBinsX();
-    pyXMin  = pyHist->GetXaxis()->GetXmin();
-    pyXMax  = pyHist->GetXaxis()->GetXmax();
-    
-    pzNBins = pzHist->GetNBinsX();
-    pzXMin  = pzHist->GetXaxis()->GetXmin();
-    pzXMax  = pzHist->GetXaxis()->GetXmax();
-    
     gaussFuncPx = new TF1("gaussFuncPx", 
             "[0]*TMath::Gaus(x,[1],[2])",-37000,53000);
     gaussFuncPx->SetParameters(40000, 58, 3500);
@@ -50,4 +43,6 @@ Int_t Program::Setup()
             "Non-Boosted Angle Between D ^{0} and #bar{D}^{0}", 50, 179, 181);
     histBoost = new TH1F("Boosted D^{0} #bar{D^{0}} Angle",
             "Boosted Angle Between D ^{0} and #bar{D}^{0}", 200, 0, 5);
+
+    return 0;
 }

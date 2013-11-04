@@ -1,7 +1,7 @@
-#include "Program.h"
+#include "../include/Program.h"
 using namespace std;
 
-void Program::Boost()
+Int_t Program::Boost()
 {
     TLorentzVector Psi_3770(0.0, 0.0, 0.0, PSIMASS);
 
@@ -52,7 +52,6 @@ void Program::Boost()
         // Fill hist in degrees (default = radians)
     }
 
-    gStyle->SetOptStat(0);
 
     TCanvas     *anglesCanvas        = new TCanvas("anglesCanvas", "anglesCanvas", 1000, 500);
     anglesCanvas->Divide(2,1);
@@ -66,12 +65,14 @@ void Program::Boost()
     histBoost->SetTitle("Boosted Angle Between D ^{0} and #bar{D}^{0}; Angle [ #circ];");
     histBoost->Draw();
 
-    anglesCanvas->Print("anglesCanvas.eps");
+    anglesCanvas->Print("../graphs/boost/anglesCanvas.eps");
 
     TCanvas     *boostedAngle        = new TCanvas("boostedAngle", "boostedAngle", 1000, 500);
 
     histBoost->SetLineColor(4);
     histBoost->Draw();
 
-    boostedAngle->Print("boostedAngle.eps");
+    boostedAngle->Print("../graphs/boost/boostedAngle.eps");
+
+    return 0;
 }

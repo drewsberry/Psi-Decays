@@ -11,7 +11,7 @@ CXXFLAGS += -g $(MOREINCSFLAGS)
 
 LIBS += -lMinuit -lRooFit -lRooFitCore -lHtml
 
-PROG = $(shell grep -l main *.cpp | sed 's/\.cpp//g')
+PROG = ../bin/$(shell grep -l main *.cpp | sed 's/\.cpp//g')
 
 SRCS += $(wildcard *.$(SrcSuf))
 OBJS := $(patsubst %.$(SrcSuf),%.$(ObjSuf),$(SRCS))

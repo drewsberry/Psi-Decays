@@ -1,49 +1,94 @@
-#include "Main.h"
+#include "../include/Main.h"
+#include "../include/Program.h"
+#include "../include/LHCbStyle.h"
+using namespace std;
 
-// We want to use Example
-#include "Program.h"
+bool flagCheck(string, int, char, bool *);
+void printHelp(bool);
 
-int main(int argc, char **argv)
+bool flagCheck(string flag, int argc, char *argv[], bool *argbool)
 {
-    std::cout << "Use switch \"-p\" or \"--persistent\" for app persistence." 
-        << std::endl;
-    std::cout << std::endl;
+    int i = 0;
+    for(i = 0; i < argc; i++) {
+        if(argv[i] == flag) {
+            argbool[i] = true;
+            return true;
+        }
+    } 
+    return false;
+}
+
+void printHelp(bool options)
+{
+    if(options) {
+        cout << "Options: " << endl;
+        cout << "\t-h : print root usage" << endl;
+        cout << "\t-b : run in batch mode without graphics" << endl << endl;
+        cout << "\t--help       : print root usage" << endl;
+        cout << "\t--persist    : run persistently, meaning graphics remain; exit with CTRL-C" << endl;
+        cout << "\t--lhcb-style : use the standard LHCb presentation standards" << endl << endl;
+    }
+}
+
+int main(int argc, char *argv[])
+{
+    int i = 0;
+    bool argbool[argc];
+    argbool[0] = true;
+    for(i = 1; i < argc; i++) {
+        argbool[i] = false;
+    }
+
+    bool batch = flagCheck("-b", argc, argv, argbool);
+    bool lhcbStyle = flagCheck("--lhcb-style", argc, argv, argbool);
+    bool persist = flagCheck("--persist", argc, argv, argbool);
+    bool options = flagCheck("--options", argc, argv, argbool);
+
+    if(argc - 1 > batch + lhcbStyle + persist + options) {
+        for(i = 0; i < argc; i++) {
+            if(argbool[i] == false) {
+                cout << "Unknown option: " << argv[i] << endl;
+            }
+        }
+        cout << endl;
+        printHelp(true);
+        return 1;
+    }
+
+    printHelp(options);
+  
+    if(lhcbStyle) {
+        LHCbStyle();
+    }
   
 ////////////// Allows it to make plots... but run with -b if you don't want them on screen!!!
     TApplication *App = new TApplication("App",&argc,argv); 
-    std::cout << "App created." << std::endl;
+    cout << "App created." << endl;
   
-////////////// Create an instance of class "Example" called "Exy"
+////////////// Create an instance of class "Program" called "Prog"
     Program *Prog = new Program;
-    std::cout << "Prog created." << std::endl;
+    cout << "Prog created." << endl;
   
 ///////////// Runs the actual code
-    std::cout << "Executing code..." << std::endl;
-    Prog -> Fit();
-    Prog -> Boost();
+    cout << "Executing code..." << endl;
+    Prog->Setup();
+    Prog->Fit();
+    Prog->Boost();
   
 ///////////// If switch used, run app
 ///////////// Any pointer you create with "new" you must delete
     delete Prog;
-    std::cout << "Prog deleted." << std::endl;
-  
-    // Add the option to run root persistently
-    std::string persistentFlag1 = "--persistent";
-    std::string persistentFlag2 = "-p";
-  
-    if (argv[1] != NULL)
-    {
-        if ((argv[1] == persistentFlag1) || (argv[1] == persistentFlag2))
-        {
-            std::cout << std::endl << "Running app persistently..." << std::endl
-                << "Press CTRL-C to exit..." << std::endl;
-            App -> Run();
-        }
+    cout << "Prog deleted." << endl;
+
+    if(persist) {
+        cout << endl << "Running app persistently... " << endl
+            << "Press CTRL-C to exit." << endl;
+        App->Run();
     }
-  
+
     delete App;
-    std::cout << "App deleted. " << std::endl ;
+    cout << "App deleted." << endl ;
   
-    return true; // exits the function
+    return 0;
 }
 

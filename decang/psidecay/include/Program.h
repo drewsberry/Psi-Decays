@@ -57,8 +57,8 @@ private:
   TF1       *totalPz;
 
   // Root file
-  TFile     *file           = TFile::Open("momentum.root");
-  TTree     *tree           = (TTree *)file -> Get("mc_k3pi");
+  TFile     *file;
+  TTree     *tree;
 
   // Histograms
   TH1F      *pxHist;
@@ -67,9 +67,9 @@ private:
   TH1F      *pxRand;
   TH1F      *pyRand;
   TH1F      *pzRand;
-  TH1F      *pxHistScale;
-  TH1F      *pyHistScale;
-  TH1F      *pzHistScale;
+  TH1F      pxHistScale;
+  TH1F      pyHistScale;
+  TH1F      pzHistScale;
 
   // Parameter arrays
   Double_t  ipar[8]; // Initial parameters
@@ -94,7 +94,7 @@ public:
   }
 
   // Function declarations and/or definitions
-  void Setup();
-  void Fit();
-  void Boost();
+  Int_t Setup();
+  Int_t Fit();
+  Int_t Boost();
 };

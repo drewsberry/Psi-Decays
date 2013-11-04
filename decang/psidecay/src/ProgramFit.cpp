@@ -1,7 +1,7 @@
-#include "Program.h"
+#include "../include/Program.h"
 using namespace std;
 
-void Program::Fit()
+Int_t Program::Fit()
 {
     TCanvas     *fitCanvas      = new TCanvas("fitCanvas", "Fitting Canvas", 1500, 500);
     fitCanvas->Divide(3,1);
@@ -53,15 +53,27 @@ void Program::Fit()
         cout << "Parameter " << i << ":  " << fpar[i] << endl;
     cout << endl;
 
-    fitCanvas -> Print("fitCanvas.eps");
+    fitCanvas -> Print("../graphs/fit/fitCanvas.eps");
+
+    pxNBins = pxHist->GetNbinsX();
+    pxXMin  = pxHist->GetXaxis()->GetXmin();
+    pxXMax  = pxHist->GetXaxis()->GetXmax();
+    
+    pyNBins = pyHist->GetNbinsX();
+    pyXMin  = pyHist->GetXaxis()->GetXmin();
+    pyXMax  = pyHist->GetXaxis()->GetXmax();
+    
+    pzNBins = pzHist->GetNbinsX();
+    pzXMin  = pzHist->GetXaxis()->GetXmin();
+    pzXMax  = pzHist->GetXaxis()->GetXmax();
 
     pxRand      = new TH1F("pxRand", "pxRand", pxNBins, pxXMin, pxXMax);
     pyRand      = new TH1F("pyRand", "pyRand", pyNBins, pyXMin, pyXMax);
     pzRand      = new TH1F("pzRand", "pzRand", pzNBins, pzXMin, pzXMax);
 
-    pxHistScale = new TH1F("pxHistScale", "pxHistScale", pxNBins, pxXMin, pxXMax);
-    pyHistScale = new TH1F("pyHistScale", "pyHistScale", pyNBins, pyXMin, pyXMax);
-    pzHistScale = new TH1F("pzHistScale", "pzHistScale", pzNBins, pzXMin, pzXMax);   
+    pxHistScale = TH1F("pxHistScale", "pxHistScale", pxNBins, pxXMin, pxXMax);
+    pyHistScale = TH1F("pyHistScale", "pyHistScale", pyNBins, pyXMin, pyXMax);
+    pzHistScale = TH1F("pzHistScale", "pzHistScale", pzNBins, pzXMin, pzXMax);   
     
     for (Int_t i; i < 1000000; i++)
     {
@@ -75,24 +87,24 @@ void Program::Fit()
 
     randCanvas->cd(1);
     pxHistScale = *pxHist;
-    pxHistScale->Draw();
+    pxHistScale.Draw();
     pxRand->Scale((pxHist->GetEntries())/(pxRand->GetEntries()));
     pxRand->Draw("same");
 
 
     randCanvas->cd(2);
     pyHistScale = *pyHist;
-    pyHistScale->Draw();
+    pyHistScale.Draw();
     pyRand->Scale((pyHist->GetEntries())/(pyRand->GetEntries()));
     pyRand->Draw("same");
 
     randCanvas->cd(3);
     pzHistScale = *pzHist;
-    pzHistScale->Draw();
+    pzHistScale.Draw();
     pzRand->Scale((pzHist->GetEntries())/(pzRand->GetEntries()));
     pzRand->Draw("same");
 
-    randCanvas->Print("randCanvas.eps");
+    randCanvas->Print("../graphs/fit/randCanvas.eps");
 
     TCanvas     *distroCanvas     = new TCanvas("distroCanvas", "Distribution Canvas", 1500, 500);
     distroCanvas->Divide(3,1);
@@ -106,5 +118,7 @@ void Program::Fit()
     distroCanvas->cd(3);
     totalPz->Draw();
 
-    distroCanvas->Print("distroCanvas.eps");
+    distroCanvas->Print("../graphs/fit/distroCanvas.eps");
+
+    return 0;
 }
