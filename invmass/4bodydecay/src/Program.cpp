@@ -12,37 +12,51 @@ Int_t Program::Code()
     gStyle->SetOptStat(0);
 
     K_plusK_minus1Hist1 = new TH1F("KplusKminus1Hist1", 
-            "m(K+ K-[1])^2", 50, 0.95, 1.55);
+            "K^{+} K^{-}_{1};m^{2}(K^{+} K^{-}_{1}) [(GeV/c^{2})^{2}]", 
+            50, 0.95, 1.55);
     K_plusK_minus2Hist = new TH1F("K_plusK_minus2Hist", 
-            "m(K+ K-[2])^2", 50, 0.95, 1.55);
+            "K^{+} K^{-}_{2};m^{2}(K^{+} K^{-}_{2}) [(GeV/c^{2})^{2}]",
+            50, 0.95, 1.55);
     K_minus1K_minus2Hist = new TH1F("K_minus1K_minus2Hist", 
-            "m(K-[1] K-[2])^2", 50, 0.95, 1.55);
+            "K^{-}_{1} K^{-}_{2};m^{2}(K^{-}_{1} K^{-}_{2}) [(GeV/c^{2})^{2}]",
+            50, 0.95, 1.55);
     
     K_plusPi_plusHist1 = new TH1F("K_plusPi_plusHist1", 
-            "m(K+ Pi+)^2", 50, 0.35, 0.8);
+            "K^{+} #pi^{+};m^{2}(K^{+} #pi^{+}) [(GeV/c^{2})^{2}]",
+            50, 0.35, 0.8);
     K_minus1Pi_plusHist = new TH1F("K_minus1Pi_plusHist",
-            "m(K-[1] Pi+)^2", 50, 0.35, 0.8);
+            "K^{-}_{1} #pi^{+};m^{2}(K^{-}_{1} #pi^{+}) [(GeV/c^{2})^{2}]",
+            50, 0.35, 0.8);
     K_minus2Pi_plusHist = new TH1F("K_minus2Pi_plusHist", 
-            "m(K-[2] Pi+)^2", 50, 0.35, 0.8);
+            "K^{-}_{2} #pi^{+};m^{2}(K^{-}_{2} #pi^{+}) [(GeV/c^{2})^{2}]",
+            50, 0.35, 0.8);
     
     K_plusK_minus1K_minus2Hist1 = new TH1F("K_plusK_minus1K_minus2Hist1",
-            "m(K+ K-[1] K-[2])^2", 50, 2.1, 3);
+            "K^{+} K^{-}_{1} K^{-}_{2};m^{2}(K^{+} K^{-}_{1} K^{-}_{2}) [(GeV/c^{2})^{2}]", 
+            50, 2.1, 3);
 
     K_plusK_minus1Pi_plusHist1 = new TH1F("K_plusK_minus1Pi_plusHist1",
-            "m(K+ K-[1]) Pi+)^2", 50, 1.2, 1.9);
+            "K^{+} K^{-}_{1} #pi^{+};m^{2}(K^{+} K^{-}_{1} #pi^{+}) [(GeV/c^{2})^{2}]",
+            50, 1.2, 1.9);
     K_plusK_minus2Pi_plusHist = new TH1F("K_plusK_minus2Pi_plusHist",
-            "m(K+ K-[2]) Pi+)^2", 50, 1.2, 1.9);
+            "K^{+} K^{-}_{2} #pi^{+};m^{2}(K^{+} K^{-}_{2} #pi^{+}) [(GeV/c^{2})^{2}]",
+            50, 1.2, 1.9);
     K_minus1K_minus2Pi_plusHist = new TH1F("K_minus1K_minus2Pi_plusHist", 
-            "m(K-[1] K-[2] Pi+)^2", 50, 1.2, 1.9);
+            "K^{-}_{1} K^{-}_{2} #pi^{+};m^{2}(K^{-}_{1} K^{-}_{2} #pi^{+}) [(GeV/c^{2})^{2}]",
+            50, 1.2, 1.9);
 
     K_plusK_minus1Hist2 = new TH1F("K_plusK_minus1Hist2",
-            "m(KK)^2", 50, 0.98, 1.25);
+            "K K; m(K K) [GeV/c^{2}]",
+            50, 0.98, 1.25);
     K_plusPi_plusHist2 = new TH1F("K_plusPi_plusHist2",
-            "m(KPi)^2", 50, 0.62, 0.9);
+            "K #pi; m(K #pi) [GeV/c^{2}]", 
+            50, 0.62, 0.9);
     K_plusK_minus1K_minus2Hist2 = new TH1F("K_plusK_minus1K_minus2Hist2",
-            "m(KKK)^2", 50, 1.48, 1.74);
+            "K K K; m(K K K) [GeV/c^{2}]", 
+            50, 1.48, 1.74);
     K_plusK_minus1Pi_plusHist2 = new TH1F("K_plusK_minus1Pi_plusHist2",
-            "m(KKPi)^2", 50, 1.12, 1.38);
+            "K K #pi; m(K K #pi) [GeV/c^{2}]",
+            50, 1.12, 1.38);
     // Initiliase all the histograms used for plotting later on
 
     TLorentzVector D0(0.0, 0.0, 0.0, 1.86484);
@@ -104,21 +118,18 @@ Int_t Program::Code()
     canv1->Divide(3,1);
 
     canv1->cd(1);
-    K_plusK_minus1Hist1->SetTitle("K^{+} K^{-}_{1};m^{2}(K^{+} K^{-}_{1}) [(GeV/c^{2})^{2}]");
     K_plusK_minus1Hist1->GetXaxis()->CenterTitle();
     K_plusK_minus1Hist1->GetXaxis()->SetTitleOffset(1.25);
     K_plusK_minus1Hist1->SetLineColor(2);
     K_plusK_minus1Hist1->Draw();
 
     canv1->cd(2);
-    K_plusK_minus2Hist->SetTitle("K^{+} K^{-}_{2};m^{2}(K^{+} K^{-}_{2}) [(GeV/c^{2})^{2}]");
     K_plusK_minus2Hist->GetXaxis()->CenterTitle();
     K_plusK_minus2Hist->GetXaxis()->SetTitleOffset(1.25);
     K_plusK_minus2Hist->SetLineColor(3);
     K_plusK_minus2Hist->Draw();
 
     canv1->cd(3);
-    K_minus1K_minus2Hist->SetTitle("K^{-}_{1} K^{-}_{2};m^{2}(K^{-}_{1} K^{-}_{2}) [(GeV/c^{2})^{2}]");
     K_minus1K_minus2Hist->GetXaxis()->CenterTitle();
     K_minus1K_minus2Hist->GetXaxis()->SetTitleOffset(1.25);
     K_minus1K_minus2Hist->SetLineColor(4);
@@ -128,21 +139,18 @@ Int_t Program::Code()
     canv2->Divide(3,1);
 
     canv2->cd(1);
-    K_plusPi_plusHist1->SetTitle("K^{+} #pi^{+};m^{2}(K^{+} #pi^{+}) [(GeV/c^{2})^{2}]");
     K_plusPi_plusHist1->GetXaxis()->CenterTitle();
     K_plusPi_plusHist1->GetXaxis()->SetTitleOffset(1.25);
     K_plusPi_plusHist1->SetLineColor(2);
     K_plusPi_plusHist1->Draw();
 
     canv2->cd(2);
-    K_minus1Pi_plusHist->SetTitle("K^{-}_{1} #pi^{+};m^{2}(K^{-}_{1} #pi^{+}) [(GeV/c^{2})^{2}]");
     K_minus1Pi_plusHist->GetXaxis()->CenterTitle();
     K_minus1Pi_plusHist->GetXaxis()->SetTitleOffset(1.25);
     K_minus1Pi_plusHist->SetLineColor(3);
     K_minus1Pi_plusHist->Draw();
 
     canv2->cd(3);
-    K_minus2Pi_plusHist->SetTitle("K^{-}_{2} #pi^{+};m^{2}(K^{-}_{2} #pi^{+}) [(GeV/c^{2})^{2}]");
     K_minus2Pi_plusHist->GetXaxis()->CenterTitle();
     K_minus2Pi_plusHist->GetXaxis()->SetTitleOffset(1.25);
     K_minus2Pi_plusHist->SetLineColor(4);
@@ -150,7 +158,6 @@ Int_t Program::Code()
 
     TCanvas* canv3 = new TCanvas("canv3", "Canvas", 1200, 800);
 
-    K_plusK_minus1K_minus2Hist1->SetTitle("K^{+} K^{-}_{1} K^{-}_{2};m^{2}(K^{+} K^{-}_{1} K^{-}_{2}) [(GeV/c^{2})^{2}]");
     K_plusK_minus1K_minus2Hist1->GetXaxis()->CenterTitle();
     K_plusK_minus1K_minus2Hist1->GetXaxis()->SetTitleOffset(1.25);
     K_plusK_minus1K_minus2Hist1->SetLineColor(6);
@@ -160,21 +167,18 @@ Int_t Program::Code()
     canv4->Divide(3,1);
 
     canv4->cd(1);
-    K_plusK_minus1Pi_plusHist1->SetTitle("K^{+} K^{-}_{1} #pi^{+};m^{2}(K^{+} K^{-}_{1} #pi^{+}) [(GeV/c^{2})^{2}]");
     K_plusK_minus1Pi_plusHist1->GetXaxis()->CenterTitle();
     K_plusK_minus1Pi_plusHist1->GetXaxis()->SetTitleOffset(1.25);
     K_plusK_minus1Pi_plusHist1->SetLineColor(2);
     K_plusK_minus1Pi_plusHist1->Draw();
 
     canv4->cd(2);
-    K_plusK_minus2Pi_plusHist->SetTitle("K^{+} K^{-}_{2} #pi^{+};m^{2}(K^{+} K^{-}_{2} #pi^{+}) [(GeV/c^{2})^{2}]");
     K_plusK_minus2Pi_plusHist->GetXaxis()->CenterTitle();
     K_plusK_minus2Pi_plusHist->GetXaxis()->SetTitleOffset(1.25);
     K_plusK_minus2Pi_plusHist->SetLineColor(3);
     K_plusK_minus2Pi_plusHist->Draw();
 
     canv4->cd(3);
-    K_minus1K_minus2Pi_plusHist->SetTitle("K^{-}_{1} K^{-}_{2} #pi^{+};m^{2}(K^{-}_{1} K^{-}_{2} #pi^{+}) [(GeV/c^{2})^{2}]");
     K_minus1K_minus2Pi_plusHist->GetXaxis()->CenterTitle();
     K_minus1K_minus2Pi_plusHist->GetXaxis()->SetTitleOffset(1.25);
     K_minus1K_minus2Pi_plusHist->SetLineColor(4);
@@ -184,22 +188,18 @@ Int_t Program::Code()
     canv5->Divide(2,2);
 
     canv5->cd(1);
-    K_plusK_minus1Hist2->SetTitle("K K; m(K K) [GeV/c^{2}]");
     K_plusK_minus1Hist2->SetLineColor(1);
     K_plusK_minus1Hist2->Draw();
 
     canv5->cd(2);
-    K_plusPi_plusHist2->SetTitle("K #pi; m(K #pi) [GeV/c^{2}]");
     K_plusPi_plusHist2->SetLineColor(2);
     K_plusPi_plusHist2->Draw();
 
     canv5->cd(3);
-    K_plusK_minus1K_minus2Hist2->SetTitle("K K K; m(K K K) [GeV/c^{2}]");
     K_plusK_minus1K_minus2Hist2->SetLineColor(3);
     K_plusK_minus1K_minus2Hist2->Draw();
 
     canv5->cd(4);
-    K_plusK_minus1Pi_plusHist2->SetTitle("K K #pi; m(K K #pi) [GeV/c^{2}]");
     K_plusK_minus1Pi_plusHist2->SetLineColor(4);
     K_plusK_minus1Pi_plusHist2->Draw();
 
@@ -214,6 +214,7 @@ Int_t Program::Code()
     delete canv2;
     delete canv3;
     delete canv4;
+    delete canv5;
 
     delete K_plusK_minus1Hist1;
     delete K_plusK_minus2Hist;
