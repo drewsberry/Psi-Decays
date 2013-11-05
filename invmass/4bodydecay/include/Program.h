@@ -34,24 +34,24 @@ class Program {
 private:
   // Declare any variables/functions used privately by Program here
 
-  TH1F *K_plusK_minus1Hist1; //1*
-  TH1F *K_plusK_minus2Hist; //2
-  TH1F *K_minus1K_minus2Hist; //3
+  TH1F *K_plusK_minus1Hist1;
+  TH1F *K_plusK_minus2Hist;
+  TH1F *K_minus1K_minus2Hist;
 
-  TH1F *K_plusPi_plusHist1; //4*
-  TH1F *K_minus1Pi_plusHist; //5
-  TH1F *K_minus2Pi_plusHist; //6
+  TH1F *K_plusPi_plusHist1;
+  TH1F *K_minus1Pi_plusHist;
+  TH1F *K_minus2Pi_plusHist;
 
-  TH1F *K_plusK_minus1K_minus2Hist1; //7*
+  TH1F *K_plusK_minus1K_minus2Hist1;
 
-  TH1F *K_plusK_minus1Pi_plusHist1; //8*
-  TH1F *K_plusK_minus2Pi_plusHist; //9
-  TH1F *K_minus1K_minus2Pi_plusHist; //10
+  TH1F *K_plusK_minus1Pi_plusHist1;
+  TH1F *K_plusK_minus2Pi_plusHist;
+  TH1F *K_minus1K_minus2Pi_plusHist;
 
-  TH1F *K_plusK_minus1Hist2; //11*
-  TH1F *K_plusPi_plusHist2; //12*
-  TH1F *K_plusK_minus1K_minus2Hist2; //13*
-  TH1F *K_plusK_minus1Pi_plusHist2; //14*
+  TH1F *K_plusK_minus1Hist2;
+  TH1F *K_plusPi_plusHist2;
+  TH1F *K_plusK_minus1K_minus2Hist2;
+  TH1F *K_plusK_minus1Pi_plusHist2;
 
   TH1F *getHist()
   {
