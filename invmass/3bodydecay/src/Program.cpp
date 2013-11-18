@@ -86,6 +86,18 @@ Int_t Program::Code()
     DK_DDHist->Draw("Lego2");
 
     ThreeDCanv->Print("../graphs/ThreeBodyDecay3D.eps");
+
+    TCanvas *ThreeDCanvDK_DK = new TCanvas("ThreeDCanvDK_DK", "ThreeDCanvasDK_DK", 500, 500);
+
+    DK_DKHist->Draw("Lego2");
+
+    ThreeDCanvDK_DK->Print("../graphs/ThreeBodyDecayDK_DK.eps");
+
+    TCanvas *ThreeDCanvDK_DD = new TCanvas("ThreeDCanvDK_DD", "ThreeDCanvasDK_DD", 500, 500);
+
+    DK_DDHist->Draw("Lego2");
+
+    ThreeDCanvDK_DD->Print("../graphs/ThreeBodyDecayDK_DD.eps");
     
     TCanvas *TwoDCanv = new TCanvas("TwoDCanv", "TwoDCanvas", 500, 500);
 
