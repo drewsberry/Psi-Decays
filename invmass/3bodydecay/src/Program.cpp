@@ -68,35 +68,35 @@ Int_t Program::Code()
         // Fill the histograms with weighted invariant mass
     }
 
-    TCanvas *TwoDCanv = new TCanvas("TwoDCanv", "TwoDCanvas", 1000, 500);
-    TwoDCanv->Divide(2,1);
+    TCanvas *ThreeDCanv = new TCanvas("ThreeDCanv", "ThreeDCanvas", 1000, 500);
+    ThreeDCanv->Divide(2,1);
 
-    TwoDCanv->cd(1);
+    ThreeDCanv->cd(1);
     DK_DKHist->GetXaxis()->CenterTitle();
     DK_DKHist->GetXaxis()->SetTitleOffset(1.75);
     DK_DKHist->GetYaxis()->CenterTitle();
     DK_DKHist->GetYaxis()->SetTitleOffset(1.75);
     DK_DKHist->Draw("Lego2"); 
 
-    TwoDCanv->cd(2);
+    ThreeDCanv->cd(2);
     DK_DDHist->GetXaxis()->CenterTitle();
     DK_DDHist->GetXaxis()->SetTitleOffset(1.75);
     DK_DDHist->GetYaxis()->CenterTitle();
     DK_DDHist->GetYaxis()->SetTitleOffset(1.75);
     DK_DDHist->Draw("Lego2");
 
-    TwoDCanv->Print("../graphs/ThreeBodyDecay2D.eps");
+    ThreeDCanv->Print("../graphs/ThreeBodyDecay3D.eps");
     
-    TCanvas *OneDCanv = new TCanvas("OneDCanv", "OneDCanvas", 500, 500);
+    TCanvas *TwoDCanv = new TCanvas("TwoDCanv", "TwoDCanvas", 500, 500);
 
     D_DHist->GetXaxis()->CenterTitle();
     D_DHist->GetXaxis()->SetTitleOffset(1.25);
     D_DHist->Draw();
 
-    OneDCanv->Print("../graphs/ThreeBodyDecay1D.eps");
+    TwoDCanv->Print("../graphs/ThreeBodyDecay2D.eps");
 
-    delete OneDCanv;
     delete TwoDCanv;
+    delete ThreeDCanv;
     delete DK_DKHist;
     delete DK_DDHist;
     delete D_DHist;
