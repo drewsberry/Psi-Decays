@@ -20,3 +20,6 @@ Main
 
 # Swap files
 .*.swp
+
+# Resultant plot files
+*.eps
