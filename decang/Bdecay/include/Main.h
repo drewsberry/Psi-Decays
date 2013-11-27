@@ -15,3 +15,6 @@
 #include <string>
 #include <cstring>
 #include <iostream>
+
+// POSIX.2 options API integration
+#include <getopt.h>

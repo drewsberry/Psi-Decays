@@ -3,61 +3,59 @@
 #include "../include/LHCbStyle.h"
 using namespace std;
 
-bool flagCheck(string, int, char, bool *);
-void printHelp(bool);
+static int batch = 0, lhcb_style = 0, persist = 0;
 
-bool flagCheck(string flag, int argc, char *argv[], bool *argbool)
+void usage()
 {
-    int i = 0;
-    for(i = 0; i < argc; i++) {
-        if(argv[i] == flag) {
-            argbool[i] = true;
-            return true;
-        }
-    } 
-    return false;
-}
-
-void printHelp(bool options)
-{
-    if(options) {
-        cout << "Options: " << endl;
-        cout << "\t-h : print root usage" << endl;
-        cout << "\t-b : run in batch mode without graphics" << endl << endl;
-        cout << "\t--help       : print root usage" << endl;
-        cout << "\t--persist    : run persistently, meaning graphics remain; exit with CTRL-C" << endl;
-        cout << "\t--lhcb-style : use the standard LHCb presentation standards" << endl << endl;
-    }
+    cout << "Usage: Main [OPTION]...\n" << endl;
+    cout << "Options: \n"
+            "  -h, --help       : print this help and exit\n"
+            "  -b, --batch      : run in batch mode without graphics\n"
+            "  -p, --persist    : run persistently, meaning graphics remain; exit with CTRL-C\n"
+            "  -s, --lhcb-style : use the standard LHCb presentation standards" << endl;
 }
 
 int main(int argc, char *argv[])
 {
-    int i = 0;
-    bool argbool[argc];
-    argbool[0] = true;
-    for(i = 1; i < argc; i++) {
-        argbool[i] = false;
-    }
+    int flag;
 
-    bool batch = flagCheck("-b", argc, argv, argbool);
-    bool lhcbStyle = flagCheck("--lhcb-style", argc, argv, argbool);
-    bool persist = flagCheck("--persist", argc, argv, argbool);
-    bool options = flagCheck("--options", argc, argv, argbool);
+    while(1) {
+        static struct option long_options[] = {
+        {"batch",      no_argument, &batch,      true},
+        {"lhcb-style", no_argument, &lhcb_style, true},
+        {"persist",    no_argument, &persist,    true},
+        {"help",       no_argument, 0, 'h'},
+        {0, 0, 0, 0}
+        };
 
-    if(argc - 1 > batch + lhcbStyle + persist + options) {
-        for(i = 0; i < argc; i++) {
-            if(argbool[i] == false) {
-                cout << "Unknown option: " << argv[i] << endl;
-            }
+        // This is where getopt_long stores the option index.
+        int option_index = 0;
+
+        flag = getopt_long(argc, argv, "bph",
+                           long_options, &option_index);
+
+        // Detect the end of the options
+        if(flag == -1)
+            break;
+
+        switch(flag) {
+            case 'b':
+                break;
+            case 'p':
+                break;
+            case 'h':
+                usage();
+                return 0;
+            case '?':
+                printf("Try `%s --help' for more information.\n",argv[0]);
+                return 1;
+            default:
+                usage();
+                abort();
         }
-        cout << endl;
-        printHelp(true);
-        return 1;
     }
-
-    printHelp(options);
   
-    if(lhcbStyle) {
+    if(lhcb_style) {
         LHCbStyle();
     }
   
