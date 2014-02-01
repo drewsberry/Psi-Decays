@@ -1,0 +1,60 @@
+\mode<presentation>
+{
+    \usetheme{Singapore}
+    \usecolortheme{beaver}
+    \usefonttheme{structurebold}
+    \setbeamercolor{section in head/foot}{fg=black}
+}
+
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor,soul}
+\usepackage{minted}
+\usepackage{MnSymbol}
+\usepackage{datetime}
+\usepackage{hyperref}
+\usepackage{tabu}
+\usepackage{multirow}
+\usepackage[small]{caption}
+\usepackage[version-1-compatibility]{siunitx}
+\DeclareGraphicsExtensions{.pdf, .jpg, .tif, .eps}
+\graphicspath{{graphs/}{graphics/}}
+\hypersetup{colorlinks=true, linkcolor=black}
+
+\newdate{presentation}{23}{10}{2013}
+
+\newcommand{\Item}{\item[\textcolor{red}{$\bullet$}]}
+\newcommand{\SubItem}{\item[\textcolor{red}{$\filledmedtriangleright$}]}
+
+\let\oldsqrt\sqrt
+\def\sqrt{\mathpalette\DHLhksqrt}
+\def\DHLhksqrt#1#2{%
+\setbox0=\hbox{$#1\oldsqrt{#2\,}$}\dimen0=\ht0
+\advance\dimen0-0.2\ht0
+\setbox2=\hbox{\vrule height\ht0 depth -\dimen0}%
+{\box0\lower0.4pt\box2}}
+
+\makeatletter
+\newsavebox\myboxA
+\newsavebox\myboxB
+\newlength\mylenA
+\newcommand*\xbar[2][0.75]{%
+    \sbox{\myboxA}{$\m@th#2$}%
+    \setbox\myboxB\null% Phantom box
+    \ht\myboxB=\ht\myboxA%
+    \dp\myboxB=\dp\myboxA%
+    \wd\myboxB=#1\wd\myboxA% Scale phantom
+    \sbox\myboxB{$\m@th\overline{\copy\myboxB}$}%  Overlined phantom
+    \setlength\mylenA{\the\wd\myboxA}%   calc width diff
+    \addtolength\mylenA{-\the\wd\myboxB}%
+    \ifdim\wd\myboxB<\wd\myboxA%
+       \rlap{\hskip 0.5\mylenA\usebox\myboxB}{\usebox\myboxA}%
+    \else
+        \hskip -0.5\mylenA\rlap{\usebox\myboxA}{\hskip 0.5\mylenA\usebox\myboxB}%
+    \fi}
+\makeatother
+% vim: set filetype=tex:

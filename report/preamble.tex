@@ -1,0 +1,148 @@
+%% Use utf-8 encoding for foreign characters
+\usepackage[utf8]{inputenc}
+
+%% Needed for including figures and graphics
+\usepackage[pdftex]{graphicx}
+
+%% Load T1 font encoding (allowing small bold caps)
+\usepackage[T1]{fontenc}
+
+%% Use more of the page/reduce margins
+\usepackage{fullpage}
+
+%% Provides referencing and bibliography
+\usepackage[]{biblatex}
+\bibliography{references}
+
+%% Gives command \FloatBarrier, which prevents floats overflowing
+\usepackage{placeins}
+
+%% Running headers and footers (optional)
+\usepackage{fancyhdr}
+
+%% Multipart figures (optional)
+\usepackage{subfigure}
+
+%% Standard maths/equations package
+\usepackage{amsmath}
+
+%% Additional maths symbols
+\usepackage{amssymb}
+
+%% Latin modern font family
+%\usepackage{lmodern}
+
+%% Used for different date formats
+\usepackage{datetime}
+
+%% Surround parts of graphics with box (experiment)
+\usepackage{boxedminipage}
+
+%% Enable highlighting (use with \hilight or \hl or something)
+\usepackage{color, soul}
+
+%% Allows citing with \cite{tag}
+%\usepackage{cite}
+
+%% Allow multicolumn environment
+\usepackage{multicol}
+
+%% Allows \captionof command sequence, I prefer small text
+\usepackage[small]{caption}
+
+%% Gives you 1.5 and 2 line spacing
+\usepackage{setspace}
+
+% Hyperlinks, plus give pdf metadata
+\usepackage[hidelinks,
+            pdftex,
+            pdfauthor={Drew Silcock},
+            pdftitle={TGenPhaseSpace Simulation Decays},
+            pdfsubject={Histogramming random decays of particles, provided by TGenPhaseSpace},
+            pdfproducer={LaTeX with hyperref provided by TeX Live on Debian 7.0 Wheezy},
+            pdfcreator={pdflatex provided by TeX Live on Debian 7.0 Wheezy},
+            ]{hyperref}
+
+%% When printing, coloured hyperlinks are annoying
+\hypersetup{colorlinks=true}
+
+%% Needed for the H float placement option
+\usepackage{float}
+
+%% Set extension preference for graphics
+\DeclareGraphicsExtensions{.pdf, .jpg, .tif, .eps}
+
+%% Define the path(s) used to store graphics
+\graphicspath{{graphs/}{graphics/}}
+
+%% Defines new environment ``Figure'', for multicol integration
+\newenvironment{Figure}
+  {\par\medskip\noindent\minipage{\linewidth}}
+  {\endminipage\par\medskip}
+
+% New definition of square root:
+% it renames \sqrt as \oldsqrt
+\let\oldsqrt\sqrt
+% it defines the new \sqrt in terms of the old one
+\def\sqrt{\mathpalette\DHLhksqrt}
+\def\DHLhksqrt#1#2{%
+\setbox0=\hbox{$#1\oldsqrt{#2\,}$}\dimen0=\ht0
+\advance\dimen0-0.2\ht0
+\setbox2=\hbox{\vrule height\ht0 depth -\dimen0}%
+{\box0\lower0.4pt\box2}}
+
+%%% Puts the section titles in small bold caps
+%\usepackage{sectsty}
+%\sectionfont{\normalfont\scshape\bfseries}
+
+%% Make the footnote symbols cool
+%\usepackage[symbol]{footmisc}
+
+%% Show SI units nicely (gives \SI{10}{K})
+\usepackage[version-1-compatibility]{siunitx}
+
+%% Gives \toprule and \bottomrule for use in tables
+\usepackage{booktabs}
+
+%% Give nice right sized bar
+\makeatletter
+\newsavebox\myboxA
+\newsavebox\myboxB
+\newlength\mylenA
+
+%% Gives \xbar, which is the perfect width overline/bar for equations etc.
+\newcommand*\xbar[2][0.75]{%
+    \sbox{\myboxA}{$\m@th#2$}%
+    \setbox\myboxB\null% Phantom box
+    \ht\myboxB=\ht\myboxA%
+    \dp\myboxB=\dp\myboxA%
+    \wd\myboxB=#1\wd\myboxA% Scale phantom
+    \sbox\myboxB{$\m@th\overline{\copy\myboxB}$}%  Overlined phantom
+    \setlength\mylenA{\the\wd\myboxA}%   calc width diff
+    \addtolength\mylenA{-\the\wd\myboxB}%
+    \ifdim\wd\myboxB<\wd\myboxA%
+       \rlap{\hskip 0.5\mylenA\usebox\myboxB}{\usebox\myboxA}%
+    \else
+        \hskip -0.5\mylenA\rlap{\usebox\myboxA}{\hskip 0.5\mylenA\usebox\myboxB}%
+    \fi}
+\makeatother
+
+%% Gives \thickhline, useful for tables
+\makeatletter
+\newcommand{\thickhline}{%
+    \noalign {\ifnum 0=`}\fi \hrule height 1pt
+    \futurelet \reserved@a \@xhline
+}
+\newcolumntype{"}{@{\hskip\tabcolsep\vrule width 1pt\hskip\tabcolsep}}
+\makeatother
+
+%% Gives \tabu environment instead of tabular
+\usepackage{tabu}
+
+%% Gives \multirow
+\usepackage{multirow}
+
+%% Gives wraptable environment, for wrapping tables (duh)
+\usepackage{wrapfig}
+
+% vim: set filetype=tex:

@@ -1,0 +1,84 @@
+\section{Background}
+
+\subsection{Purpose}
+\begin{frame}{Purpose}
+\begin{itemize}
+
+    \Item $\psi(3770)$ decays are interesting because in a $\psi(3770)$ decay,
+        the $D^0$ and $\xbar{D^0}$ are produced in a quantum correlated state.
+    
+    \Item This quantum correlation allows better access to $D^0$ strong phase
+        information (the phases introduced by the strong force). $D^0$ phase
+        information is critical information that allows us to accurately measure
+        CP violation in beauty decays ($B \rightarrow D~K$, a big part of
+        Bristol's LHCb programme).
+    
+    \Item The amount of CP violation that occurs in such processes is important
+        because CP violation helps to explain matter-antimatter asymmetry (i.e.
+        why is the universe full of matter and not anti-matter?).
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Purpose}
+\begin{itemize}
+
+    \Item \textbf{But} at present the amount of CP violation measured to occur does
+        not account for the asymmetry that we see; there simply is not enough CP
+        violation to justify the amount of asymmetry we see.
+    
+    \Item Interestingly, $\psi(3770)$ decays can also be used to measure symmetry
+        violations in the \textbf{charm} system, thanks to the quantum correlations
+        in the decay.
+    
+    \Item Analysis of the amount of CP violation in both beauty and charm could lead
+        to a better explanation of matter-antimatter asymmetry, or to the discovery
+        of \textit{New Physics}\texttrademark.
+
+\end{itemize}
+\end{frame}
+
+\subsection{ROOT}
+\begin{frame}[fragile]{ROOT}
+    \begin{itemize}
+
+    \Item The \texttt{ROOT C++} libraries were used to simulate and analyse the
+        decay events. 
+    
+    \Item In particular the
+        \href{http://root.cern.ch/root/html/TGenPhaseSpace.html}{\texttt{TGenPhaseSpace}}
+        class was used to generate Monte Carlo (MC) phase space for n-body
+        decays of constant cross-section as per Frederick James' 1968 paper,
+        \href{http://cds.cern.ch/record/275743}{\textit{Monte Carlo Phase
+        Space}}.
+    
+    \Item The \texttt{GetDecay()} method, inheriting from
+        \texttt{TGenPhaseSpace}, generates Lorentz vectors for the decay
+        products given.
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Code}
+\begin{minted}[linenos]{c++}
+
+TLorentzVector parent(0.0,0.0,0.0, PARENTMASS);
+Double_t masses[2] = {DAUGHTER1MASS, DAUGHTER2MASS};
+
+TGenPhaseSpace event;
+event.SetDecay(parent, 2, masses);
+
+TLorentzVector *daughter1 = event.GetDecay(0);
+TLorentzVector *daughter2 = event.GetDecay(1);
+
+\end{minted}
+\end{frame}
+
+\begin{frame}{Code}
+
+This example code demonstrates the basic method; once you start looking at
+longer decay chains and relativistically boosting and analyzing them, it gets a
+lot more complicated! (And uglier...)
+
+\end{frame}
+

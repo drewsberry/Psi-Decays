@@ -1,0 +1,165 @@
+\section{Invariant Mass Distributions}
+
+\begin{frame}[fragile]{Invariant Mass Distributions}
+\begin{itemize}
+
+    \Item The invariant mass distributions of the daughter particles was calculated
+        by summing the \texttt{TLorentzVector}s of the decay products and applying
+        \texttt{ROOT}'s
+        \href{http://root.cern.ch/root/html/TLorentzVector.html\#TLorentzVector:M}{\texttt{TLorentzVector::M()}}
+        method:
+    
+    \begin{minted}{c++}
+
+TLorentzVector particleSum = *daughter1 + *daughter2;
+Double_t     invariantMass = particleSum.M();
+
+    \end{minted}
+    
+    \Item This method sums the square of each component of the four momentum to
+        find the Minkowski norm of the four momentum, or the proper mass.
+    
+    \Item If the right products are used, this invariant mass is the mass of the
+        parent particle.
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Invariant Mass Distributions}
+The equations determining this in natural units ($c = 1$) are:
+
+\begin{equation}
+    \mathbf{P} = \begin{pmatrix}
+    P^0 \\ P^1 \\ P^2 \\ P^3
+    \end{pmatrix} = 
+    \begin{pmatrix}
+    E \\ p_x \\ p_y \\ p_z
+    \end{pmatrix}
+\end{equation}
+
+\begin{equation}
+    \|\mathbf{P}\|^2 = P^\mu P_\mu = P^\mu \eta_{\mu\nu} P^\nu
+    = {E^2} - |\mathbf p|^2 = m^2
+\end{equation}
+
+where $\eta_{\mu\nu}$ is the Minkowski metric, here defined as:
+
+\begin{equation}
+    \eta_{\mu\nu} = \begin{pmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & -1 & 0 & 0 \\
+    0 & 0 & -1 & 0 \\
+    0 & 0 & 0 & -1 \\
+    \end{pmatrix}
+\end{equation}
+\end{frame}
+
+\subsection{Two body $\psi(3770) \rightarrow D^0 \xbar{D^0}$}
+
+\begin{frame}{Two body $\psi(3770) \rightarrow D^0 \xbar{D^0}$}
+
+Invariant mass distribution of the $D^0$ and $\xbar{D^0}$ matches exactly
+with the mass of the parent particle:
+
+\begin{center}
+    \includegraphics[scale=0.3]{graphs/TwoBodyDecay.eps}
+\end{center}
+\end{frame}
+
+\subsection{Three body $B^+ \rightarrow D^0 \xbar{D^0}K^+$}
+
+\begin{frame}{Three body $B^+ \rightarrow D^0 \xbar{D^0}K^+$}
+
+Three bodies, so more complicated (and prettier):
+
+\begin{center}
+    \includegraphics[width=\linewidth]{graphs/ThreeBodyDecay1.eps}
+\end{center}
+\end{frame}
+
+\begin{frame}{Three body $B^+ \rightarrow D^0 \xbar{D^0}K^+$}
+\begin{itemize}
+
+    \Item A three body decay has a two-dimensional phase space, so this is best
+        visualised as a density plot of the invariant mass distributions of
+        combinations of two of the particles.
+    
+    \Item They are not unique and can be inferred from one another due to
+        momentum conservation laws.
+    
+    \Item If there were no intermediate resonances in the decay, this should
+        decay roughly uniformly throughout the phase space, meaning given if
+        this MC were repeated an infinite number of times, the distribution
+        would be approximately flat-topped.  Considering the finite number of
+        iterations made, this isn't bad!
+    
+    \Item An example of an intermediate resonance in this decay that we are very
+        interested in is $B \rightarrow \psi(3770) K$, which is not simulated
+        here but which we will look at later.
+
+\end{itemize}
+\end{frame}
+
+\subsection{Four body $D^0 \rightarrow K^+ K^- K^- \pi^+$}
+
+\begin{frame}{Four body $D^0 \rightarrow K^+ K^- K^- \pi^+$}
+\begin{itemize}
+
+    \Item Also looked at phase space for uniform four body decays.
+    
+    \Item These produce five dimensional phase space, which is hard to
+        visualise.  I've just projected these onto axes to turn them into 1D
+        projections which \textbf{can} easily be plotted and understood.
+    
+    \Item (If you want to know more about visualising multi-dimensional phase
+        spaces, talk to Dan Saunders.)
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Four body $D^0 \rightarrow K^+ K^- K^- \pi^+$}
+
+\begin{center}
+    \includegraphics[scale=0.3]{graphs/FourBodyDecay.eps}
+\end{center}
+\end{frame}
+
+\begin{frame}{Four body $D^0 \rightarrow K^+ K^- K^- \pi^+$}
+\begin{itemize}
+
+    \Item If I had simulated intermediate resonances in the decay we would see
+        rich strong phase information arising from the interference between
+        these decays.
+    
+    \Item If you're interested in this, the structure of such decays using
+        ``Dalitz Plot Analysis'' has been done by Bristol's particle physics
+        team for $D^0 \rightarrow K K \pi \pi$ deacys, and Jack Benton is now
+        doing a Dalitz plot analysis of $D \rightarrow \pi \pi \pi \pi$ decays.
+    
+    \Item The $D^0 \rightarrow K^+ K^- K^- \pi^+$ decay strong phase information
+        has never been observed! For interest, I tabulated the possible
+        intermediate resonances:
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\tiny
+{\centering
+\input{tables/lum1.tex}
+}
+\end{frame}
+
+\begin{frame}
+\tiny
+{\centering
+\input{tables/lum2.tex}
+}
+\end{frame}
+
+\begin{frame}
+\tiny
+{\centering
+\input{tables/sm.tex}
+}
+\end{frame}

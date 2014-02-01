@@ -1,0 +1,34 @@
+\section{Background}
+
+\subsection{Purpose}
+
+The $\psi(3770)$ decays are of particular interest because the resultant $D^0$
+and $\xbar{D^0}$ are produced in a quantum correlated state. This allows for
+better access to $D^0$ phase information introduced by the strong force. This in
+turn is critical information in the accurate measurement of CP violation in
+beauty decays (e.g. $B \rightarrow D K$), which is a large part of the
+University of Bristol's LHCb programme. These $\psi(3770)$ decays can also be
+used to measure symmetry violations in the \textbf{charm} system.
+
+CP violation contributes to the matter anti-matter asymmetry that we see today,
+i.e. why the universe is full of matter and not antimatter. At present the
+amount of observed CP violation cannot account for the extent of
+matter-antimatter asymmetry present. Analysis of the CP violation of both the
+beauty and charm decays involved with the $\psi(3770)$ decays could both lead to
+a better explanation of this matter-antimatter asymmetry, or to the discovery of
+New Physics.
+
+\subsection{ROOT Framework}
+
+The \texttt{ROOT C++} framework and libraries were used for toy Monte Carlo (MC)
+decays and to analyse the results find the invariant mass distributions and
+decay angles in both the centre of mass frame and the laboratory frame. In
+particular the
+\href{http://root.cern.ch/root/html/TGenPhaseSpace.html\#TGenPhaseSpace:GetDecay}{\texttt{GetDecay()::TGenPhaseSpace}},
+    \href{http://root.cern.ch/root/html/TLorentzVector.html\#TLorentzVector:M}{\texttt{M()::TLorentzVector}}
+and
+\href{http://root.cern.ch/root/html/TLorentzVector.html\#TLorentzVector:Angle}{\texttt{Angle()::TLorentzVector}}
+methods were used to generate toy MC decays, get the invariant mass of a
+4-vector and get the angle between two 4-vectors respectively.
+
+% vim: set tw=80:
