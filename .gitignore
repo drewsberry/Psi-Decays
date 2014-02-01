@@ -30,6 +30,7 @@ Main
 *.toc
 *.vrb
 
+*.bbl
 *-blx.bib
 *.blg
 *.run.xml
